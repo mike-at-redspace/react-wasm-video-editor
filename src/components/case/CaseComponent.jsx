@@ -13,6 +13,28 @@ import AUDIO_ASSETS from './StaticAudioAssets.json';
 import VIDEO_SCENES_ASSETS from './StaticVideoScenesAssets.json';
 import { caseAssetPath } from './util';
 
+const fontNames = [
+  'Open Sans', 'Roboto', 'Montserrat', 'Lato', 'Poppins',
+  'Noto Sans', 'Oswald', 'Raleway', 'Roboto Condensed', 'Merriweather',
+  'Ubuntu', 'Source Sans Pro', 'Playfair Display', 'Quicksand',
+  'Dancing Script', 'Inconsolata', 'Muli', 'Crimson Text', 'Karla', 'Lora'
+];
+
+const typefaces = {};
+for (const fontName of fontNames) {
+  const familyName = fontName.replace(/\s+/g, '').toLowerCase();
+  typefaces[familyName] = {
+    family: fontName,
+    fonts: [
+      {
+        fontURL: `https://fonts.googleapis.com/css2?family=${encodeURIComponent(familyName)}:display=swap`,
+        weight: 'regular',
+        style: 'normal'
+      }
+    ]
+  };
+}
+
 const CaseComponent = () => {
   const cesdk_container = useRef(null);
   const cesdkRef = useRef(null);
@@ -79,6 +101,7 @@ const CaseComponent = () => {
           }
         }
       },
+      typefaces: typefaces,
       callbacks: {
         onUpload: 'local',
         onDownload: 'download',

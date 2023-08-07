@@ -97,7 +97,7 @@
     --ubq-typography-font_family,
     sans-serif
   );
-  --ubq-typography-label-m-weight: normal;
+  --ubq-typography-label-m-weight: 500;
 
   --ubq-typography-label-s-size: 10px;
   --ubq-typography-label-s-line_height: 14px;
@@ -106,7 +106,7 @@
     --ubq-typography-font_family,
     sans-serif
   );
-  --ubq-typography-label-s-weight: normal;
+  --ubq-typography-label-s-weight: 400;
 
   --ubq-typography-body-m-size: 12px;
   --ubq-typography-body-m-line_height: 18px;
@@ -132,7 +132,7 @@
     --font-family-lato,
     sans-serif
   );
-  --ubq-typography-button-m-weight: unset;
+  --ubq-typography-button-m-weight: 500;
   --ubq-canvas: hsl(210, 30%, 5%);
   --ubq-elevation-1: hsl(210, 15%, 10%);
   --ubq-elevation-2: hsl(210, 7.5%, 20%);
@@ -176,7 +176,7 @@
   --ubq-focus-outline: hsl(210, 30%, 10%);
   --ubq-overlay: hsla(210, 30%, 10%, 0.8);
   --ubq-notice-info: hsla(0, 0%, 100%, 1);
-  --ubq-notice-success: hsla(166, 90%, 37%, 1);
+  --ubq-notice-success: #49d761;
   --ubq-notice-warning: hsla(40, 100%, 60%, 1);
   --ubq-notice-error: hsla(338, 64%, 62%, 1);
   --ubq-effect-shadow: 0px 4px 16px -4px hsla(210, 27%, 9%, 0.14), 0px 1px 20px -4px hsla(210, 27%, 9%, 0.12), 0px 2px 12px -4px hsla(210, 27%, 9%, 0.2);
