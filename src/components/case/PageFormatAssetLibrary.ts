@@ -5,13 +5,7 @@ import { caseAssetPath } from './util';
 export const pageFormatI18n = (formats: PageFormatAsset[]) => {
   return Object.fromEntries([
     ['libraries.pageFormats.label', 'Formats'],
-    ...formats.map((format) => [
-      `preset.document.${format.id}`,
-      {
-        ...format.meta,
-        label: format.label?.['en'] || format.id
-      }
-    ])
+    ...formats.map((format) => [`preset.document.${format.id}`, format.label?.en])
   ]);
 };
 
@@ -25,7 +19,16 @@ export const PAGE_FORMATS_INSERT_ENTRY = {
 
   previewBackgroundType: 'contain',
   gridBackgroundType: 'cover',
-  cardLabel: (assetResult: AssetResult) => assetResult.label,
+  cardLabel: (assetResult) => {
+    if (!assetResult) {
+      return '';
+    }
+    if (typeof assetResult.label === 'string') {
+      return assetResult.label;
+    }
+    return assetResult.label?.en;
+  },
+
   cardLabelStyle: () => ({
     height: '24px',
     width: '72px',
@@ -61,13 +64,13 @@ export const PAGE_FORMATS_INSERT_ENTRY = {
 
 export const formatAssetsToPresets = (
   contentJSON: ContentJSON
-): PageFormatsDefinition => {
+) => {
   const formatPresets = Object.entries(contentJSON.assets).map(
     ([_key, asset]) => {
       const { id } = asset;
       const { width, height, unit } = (asset as PageFormatAsset).meta;
 
-      const pageFormat: PageFormatsDefinition[string] = {
+      const pageFormat = {
         width,
         height,
         unit,
@@ -88,7 +91,7 @@ interface PageFormatAsset extends AssetDefinition {
     unit: 'px' | 'mm' | 'in';
     thumbUri: string;
   };
+  label: {
+    en: string;
+  };
 }
-type PageFormatsDefinition = NonNullable<
-  NonNullable<Configuration['presets']>['pageFormats']
->;

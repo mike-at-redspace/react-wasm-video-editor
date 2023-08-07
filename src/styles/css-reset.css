@@ -4,6 +4,9 @@ html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   height: 100%;
 }
 body {
@@ -31,7 +34,7 @@ pre,
 code,
 kbd,
 samp {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: monospace;
   font-size: var(--font-regular-size);
 }
 a {
