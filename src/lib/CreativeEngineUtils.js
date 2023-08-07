@@ -6,25 +6,25 @@ export const zoomToSelectedText = async (
   paddingTop = 0,
   paddingBottom = 0
 ) => {
-  const canvasBounding = engine.element.getBoundingClientRect();
-  const canvasHeight = canvasBounding.height * window.devicePixelRatio;
+  const canvasBounding = engine.element.getBoundingClientRect()
+  const canvasHeight = canvasBounding.height * window.devicePixelRatio
   const overlapBottom = Math.max(
     (canvasBounding.top +
       canvasBounding.height -
       window.visualViewport.height) *
       window.devicePixelRatio,
     0
-  );
-  const selectedTexts = engine.block.findAllSelected();
+  )
+  const selectedTexts = engine.block.findAllSelected()
   if (selectedTexts.length === 1) {
-    const cursorPosY = engine.editor.getTextCursorPositionInScreenSpaceY();
+    const cursorPosY = engine.editor.getTextCursorPositionInScreenSpaceY()
     // The first cursorPosY is 0 if no cursor has been layouted yet. Then we ignore zoom commands.
-    const cursorPosIsValid = cursorPosY !== 0;
+    const cursorPosIsValid = cursorPosY !== 0
     if (!cursorPosIsValid) {
-      return;
+      return
     }
-    const visiblePageAreaY = canvasHeight - overlapBottom - paddingBottom;
-    const camera = engine.block.findByType('camera')[0];
+    const visiblePageAreaY = canvasHeight - overlapBottom - paddingBottom
+    const camera = engine.block.findByType('camera')[0]
 
     const cursorPosYCanvas =
       pixelToCanvasUnit(
@@ -32,34 +32,31 @@ export const zoomToSelectedText = async (
         engine.editor.getTextCursorPositionInScreenSpaceY()
       ) +
       engine.block.getPositionY(camera) -
-      pixelToCanvasUnit(engine, visiblePageAreaY);
+      pixelToCanvasUnit(engine, visiblePageAreaY)
     if (
       cursorPosY > visiblePageAreaY ||
       cursorPosY < paddingTop * window.devicePixelRatio
     ) {
-      engine.block.setPositionY(camera, cursorPosYCanvas);
+      engine.block.setPositionY(camera, cursorPosYCanvas)
     }
   }
-};
+}
 
 export const pixelToCanvasUnit = (engine, pixel) => {
-  const sceneUnit = engine.block.getEnum(
-    engine.scene.get(),
-    'scene/designUnit'
-  );
-  let densityFactor = 1;
+  const sceneUnit = engine.block.getEnum(engine.scene.get(), 'scene/designUnit')
+  let densityFactor = 1
   if (sceneUnit === 'Millimeter') {
     densityFactor =
-      engine.block.getFloat(engine.scene.get(), 'scene/dpi') / 25.4;
+      engine.block.getFloat(engine.scene.get(), 'scene/dpi') / 25.4
   }
   if (sceneUnit === 'Inch') {
-    densityFactor = engine.block.getFloat(engine.scene.get(), 'scene/dpi');
+    densityFactor = engine.block.getFloat(engine.scene.get(), 'scene/dpi')
   }
   return (
     pixel /
     (window.devicePixelRatio * densityFactor * engine.scene.getZoomLevel())
-  );
-};
+  )
+}
 
 // Appends a block into the scene and positions it somewhat randomly.
 export const autoPlaceBlockOnPage = (
@@ -75,24 +72,23 @@ export const autoPlaceBlockOnPage = (
 ) => {
   engine.block
     .findAllSelected()
-    .forEach((blockId) => engine.block.setSelected(blockId, false));
-  engine.block.appendChild(page, block);
+    .forEach(blockId => engine.block.setSelected(blockId, false))
+  engine.block.appendChild(page, block)
 
-  const pageWidth = engine.block.getWidth(page);
-  const posX =
-    pageWidth * (config.basePosX + Math.random() * config.randomPosX);
-  engine.block.setPositionXMode(block, 'Absolute');
-  engine.block.setPositionX(block, posX);
+  const pageWidth = engine.block.getWidth(page)
+  const posX = pageWidth * (config.basePosX + Math.random() * config.randomPosX)
+  engine.block.setPositionXMode(block, 'Absolute')
+  engine.block.setPositionX(block, posX)
 
-  const pageHeight = engine.block.getWidth(page);
+  const pageHeight = engine.block.getWidth(page)
   const posY =
-    pageHeight * (config.basePosY + Math.random() * config.randomPosY);
-  engine.block.setPositionYMode(block, 'Absolute');
-  engine.block.setPositionY(block, posY);
+    pageHeight * (config.basePosY + Math.random() * config.randomPosY)
+  engine.block.setPositionYMode(block, 'Absolute')
+  engine.block.setPositionY(block, posY)
 
-  engine.block.setSelected(block, true);
-  engine.editor.addUndoStep();
-};
+  engine.block.setSelected(block, true)
+  engine.editor.addUndoStep()
+}
 
 export const replaceImage = (
   engine,
@@ -100,42 +96,42 @@ export const replaceImage = (
   imageFileURI,
   addUndoStep = true
 ) => {
-  engine.block.setString(block, 'image/imageFileURI', imageFileURI);
-  engine.block.resetCrop(block);
-  engine.block.setBool(block, 'placeholderControls/showButton', false);
-  engine.block.setBool(block, 'placeholderControls/showOverlay', false);
+  engine.block.setString(block, 'image/imageFileURI', imageFileURI)
+  engine.block.resetCrop(block)
+  engine.block.setBool(block, 'placeholderControls/showButton', false)
+  engine.block.setBool(block, 'placeholderControls/showOverlay', false)
   if (addUndoStep) {
-    engine.editor.addUndoStep();
+    engine.editor.addUndoStep()
   }
-};
+}
 
 export const addImage = async (engine, parentId, imageURI, baseSize = 0.5) => {
-  const block = engine.block.create('image');
-  engine.block.setString(block, 'image/imageFileURI', imageURI);
-  engine.block.setBool(block, 'placeholderControls/showButton', false);
-  engine.block.setBool(block, 'placeholderControls/showOverlay', false);
+  const block = engine.block.create('image')
+  engine.block.setString(block, 'image/imageFileURI', imageURI)
+  engine.block.setBool(block, 'placeholderControls/showButton', false)
+  engine.block.setBool(block, 'placeholderControls/showOverlay', false)
 
-  const { width, height } = await getImageSize(imageURI);
+  const { width, height } = await getImageSize(imageURI)
   const [parentWidth, parentHeight] = [
     engine.block.getWidth(parentId),
     engine.block.getHeight(parentId)
-  ];
+  ]
 
-  const imageAspectRatio = width / height;
-  const parentAspectRatio = parentWidth / parentHeight;
-  let scaleFactor = baseSize;
+  const imageAspectRatio = width / height
+  const parentAspectRatio = parentWidth / parentHeight
+  let scaleFactor = baseSize
   if (imageAspectRatio > parentAspectRatio) {
-    scaleFactor *= parentWidth / width;
+    scaleFactor *= parentWidth / width
   } else {
-    scaleFactor *= parentHeight / height;
+    scaleFactor *= parentHeight / height
   }
-  engine.block.setHeightMode(block, 'Absolute');
-  engine.block.setHeight(block, height * scaleFactor);
-  engine.block.setWidthMode(block, 'Absolute');
-  engine.block.setWidth(block, width * scaleFactor);
+  engine.block.setHeightMode(block, 'Absolute')
+  engine.block.setHeight(block, height * scaleFactor)
+  engine.block.setWidthMode(block, 'Absolute')
+  engine.block.setWidth(block, width * scaleFactor)
 
-  autoPlaceBlockOnPage(engine, parentId, block);
-};
+  autoPlaceBlockOnPage(engine, parentId, block)
+}
 
 // Color utilities
 export function hexToRgb(hex) {
@@ -143,24 +139,24 @@ export function hexToRgb(hex) {
     r: ('0x' + hex[1] + hex[2]) | 0,
     g: ('0x' + hex[3] + hex[4]) | 0,
     b: ('0x' + hex[5] + hex[6]) | 0
-  };
+  }
 }
 export function rgbToHex(r, g, b) {
-  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
 }
 
 export const normalizeColors = ({ r, g, b }) => ({
   r: r / 255,
   g: g / 255,
   b: b / 255
-});
+})
 export const denormalizeColors = ({ r, g, b }) => ({
   r: r * 255,
   g: g * 255,
   b: b * 255
-});
+})
 
-const PRECISION = 0.001;
+const PRECISION = 0.001
 /**
  * Compares two colors with a certain precision
  * @param {ColorObject} colorA First color to compare
@@ -172,30 +168,30 @@ export const isColorEqual = (colorA, colorB, precision = PRECISION) => {
     Math.abs(colorB.r - colorA.r) < precision &&
     Math.abs(colorB.g - colorA.g) < precision &&
     Math.abs(colorB.b - colorA.b) < precision
-  );
-};
-export const RGBAArrayToObj = ([r, g, b]) => ({ r, g, b });
+  )
+}
+export const RGBAArrayToObj = ([r, g, b]) => ({ r, g, b })
 
 export function getImageSize(url) {
-  const img = document.createElement('img');
+  const img = document.createElement('img')
 
   const promise = new Promise((resolve, reject) => {
     img.onload = () => {
       // Natural size is the actual image size regardless of rendering.
       // The 'normal' `width`/`height` are for the **rendered** size.
-      const width = img.naturalWidth;
-      const height = img.naturalHeight;
+      const width = img.naturalWidth
+      const height = img.naturalHeight
 
       // Resolve promise with the width and height
-      resolve({ width, height });
-    };
+      resolve({ width, height })
+    }
 
     // Reject promise on error
-    img.onerror = reject;
-  });
+    img.onerror = reject
+  })
 
   // Setting the source makes it start downloading and eventually call `onload`
-  img.src = url;
+  img.src = url
 
-  return promise;
+  return promise
 }

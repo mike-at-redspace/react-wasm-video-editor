@@ -9,7 +9,7 @@ export const createApplyLayoutAsset = (engine) => {
     const selectedBlocks = engine.block.findAllSelected();
     if (
       selectedBlocks.length === 1 &&
-      engine.block.getType(selectedBlocks[0]).includes('page')
+      engine.block.getType(selectedBlocks[0]).includes("page")
     ) {
       pageToApplyLayoutTo = selectedBlocks[0];
     }
@@ -43,14 +43,14 @@ const copyAssets = (engine, fromPageId, toPageId) => {
     getChildrenTree(engine, fromPageId).flat()
   );
   const textsOnFromPage = fromChildren.filter((childId) =>
-    engine.block.getType(childId).includes('text')
+    engine.block.getType(childId).includes("text")
   );
 
   const imagesOnFromPage = fromChildren
-    .filter((childId) => engine.block.getType(childId).includes('image'))
+    .filter((childId) => engine.block.getType(childId).includes("image"))
     .filter(
       (imageBlock) =>
-        !engine.block.getBool(imageBlock, 'placeholderControls/showOverlay')
+        !engine.block.getBool(imageBlock, "placeholderControls/showOverlay")
     );
 
   const toChildren = visuallySortBlocks(
@@ -58,10 +58,10 @@ const copyAssets = (engine, fromPageId, toPageId) => {
     getChildrenTree(engine, toPageId).flat()
   );
   const textsOnToPage = toChildren.filter((childId) =>
-    engine.block.getType(childId).includes('text')
+    engine.block.getType(childId).includes("text")
   );
   const imagesOnToPage = toChildren.filter((childId) =>
-    engine.block.getType(childId).includes('image')
+    engine.block.getType(childId).includes("image")
   );
   for (
     let index = 0;
@@ -70,20 +70,20 @@ const copyAssets = (engine, fromPageId, toPageId) => {
   ) {
     const fromBlock = textsOnFromPage[index];
     const toBlock = textsOnToPage[index];
-    const fromText = engine.block.getString(fromBlock, 'text/text');
+    const fromText = engine.block.getString(fromBlock, "text/text");
     const fromFontFileUri = engine.block.getString(
       fromBlock,
-      'text/fontFileUri'
+      "text/fontFileUri"
     );
     const fromTextFillColor = engine.block.getColorRGBA(
       fromBlock,
-      'fill/solid/color'
+      "fill/solid/color"
     );
-    engine.block.setString(toBlock, 'text/text', fromText);
-    engine.block.setString(toBlock, 'text/fontFileUri', fromFontFileUri);
+    engine.block.setString(toBlock, "text/text", fromText);
+    engine.block.setString(toBlock, "text/fontFileUri", fromFontFileUri);
     engine.block.setColorRGBA(
       toBlock,
-      'fill/solid/color',
+      "fill/solid/color",
       ...fromTextFillColor
     );
   }
@@ -96,23 +96,23 @@ const copyAssets = (engine, fromPageId, toPageId) => {
     const toBlock = imagesOnToPage[index];
     const fromImageFileUri = engine.block.getString(
       fromBlock,
-      'image/imageFileURI'
+      "image/imageFileURI"
     );
-    engine.block.setString(toBlock, 'image/imageFileURI', fromImageFileUri);
-    if (engine.block.getBool(fromBlock, 'placeholderControls/showOverlay')) {
+    engine.block.setString(toBlock, "image/imageFileURI", fromImageFileUri);
+    if (engine.block.getBool(fromBlock, "placeholderControls/showOverlay")) {
       engine.block.setBool(
         toBlock,
-        'placeholderControls/showOverlay',
-        engine.block.getBool(fromBlock, 'placeholderControls/showOverlay')
+        "placeholderControls/showOverlay",
+        engine.block.getBool(fromBlock, "placeholderControls/showOverlay")
       );
       engine.block.setBool(
         toBlock,
-        'placeholderControls/showButton',
-        engine.block.getBool(fromBlock, 'placeholderControls/showButton')
+        "placeholderControls/showButton",
+        engine.block.getBool(fromBlock, "placeholderControls/showButton")
       );
     } else {
-      engine.block.setBool(toBlock, 'placeholderControls/showOverlay', false);
-      engine.block.setBool(toBlock, 'placeholderControls/showButton', false);
+      engine.block.setBool(toBlock, "placeholderControls/showOverlay", false);
+      engine.block.setBool(toBlock, "placeholderControls/showButton", false);
     }
 
     engine.block.resetCrop(toBlock);
@@ -125,19 +125,19 @@ const copyAssets = (engine, fromPageId, toPageId) => {
  * @returns The ID of the PageBlock that is currently in view
  */
 const getPageInView = (engine) => {
-  const pages = engine.block.findByType('page');
+  const pages = engine.block.findByType("page");
   const visiblePages = pages.filter((page) => engine.block.isVisible(page));
   if (visiblePages.length === 1) {
     return visiblePages[0];
   }
 
-  const camera = engine.block.findByType('camera')[0];
+  const camera = engine.block.findByType("camera")[0];
 
   const getReferenceCoordinates = (block) => [
     engine.block.getGlobalBoundingBoxX(block) +
       engine.block.getGlobalBoundingBoxWidth(block) / 2,
     engine.block.getGlobalBoundingBoxY(block) +
-      engine.block.getGlobalBoundingBoxHeight(block) / 2
+      engine.block.getGlobalBoundingBoxHeight(block) / 2,
   ];
   const distanceBetweenPoints = ([X1, Y1], [X2, Y2]) =>
     Math.hypot(X2 - X1, Y2 - Y1);
@@ -147,7 +147,7 @@ const getPageInView = (engine) => {
       distance: distanceBetweenPoints(
         getReferenceCoordinates(page),
         getReferenceCoordinates(camera)
-      )
+      ),
     }))
     .sort(
       ({ distance: distanceA }, { distance: distanceB }) =>
@@ -160,7 +160,7 @@ const getChildrenTree = (engine, block) => {
   const children = engine.block.getChildren(block);
   return [
     ...children,
-    ...children.map((childBlock) => getChildrenTree(engine, childBlock)).flat()
+    ...children.map((childBlock) => getChildrenTree(engine, childBlock)).flat(),
   ];
 };
 
@@ -176,8 +176,8 @@ const visuallySortBlocks = (engine, blocks) => {
       block,
       coordinates: [
         Math.round(engine.block.getPositionX(block)),
-        Math.round(engine.block.getPositionY(block))
-      ]
+        Math.round(engine.block.getPositionY(block)),
+      ],
     }))
     .sort(({ coordinates: [X1, Y1] }, { coordinates: [X2, Y2] }) => {
       if (Y1 === Y2) return X1 - X2;
