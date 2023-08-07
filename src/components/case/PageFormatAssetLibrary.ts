@@ -5,7 +5,7 @@ import { caseAssetPath } from './util';
 export const pageFormatI18n = (formats: PageFormatAsset[]) => {
   return Object.fromEntries([
     ['libraries.pageFormats.label', 'Formats'],
-    ...formats.map((format) => [`preset.document.${format.id}`, format.label])
+    ...formats.map((format) => [`preset.document.${format.id}`, format.label?.['en']])
   ]);
 };
 
