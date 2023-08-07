@@ -174,7 +174,7 @@ export const isColorEqual = (colorA, colorB, precision = PRECISION) => {
     Math.abs(colorB.b - colorA.b) < precision
   );
 };
-export const RGBAArrayToObj = ([r, g, b, _a]) => ({ r, g, b });
+export const RGBAArrayToObj = ([r, g, b]) => ({ r, g, b });
 
 export function getImageSize(url) {
   const img = document.createElement('img');

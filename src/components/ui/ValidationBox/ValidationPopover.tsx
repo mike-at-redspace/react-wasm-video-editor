@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './ValidationPopover.module.css';
 import validationBoxStyles from './ValidationBox.module.css';
 import classNames from 'classnames';

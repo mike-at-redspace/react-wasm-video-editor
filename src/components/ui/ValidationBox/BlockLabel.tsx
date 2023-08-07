@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './BlockLabel.module.css';
 
 import { ReactComponent as ImageIcon } from './icons/image.svg';

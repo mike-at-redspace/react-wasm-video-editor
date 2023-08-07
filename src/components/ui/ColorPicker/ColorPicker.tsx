@@ -1,5 +1,6 @@
+import React from 'react';
 import classNames from 'classnames';
-import useOnClickOutside from 'lib/useOnClickOutside';
+import useOnClickOutside from '../../../lib/useOnClickOutside';
 import { cloneElement, ReactElement, useRef, useState } from 'react';
 import { HexColorInput, HexColorPicker } from 'react-colorful';
 import { ReactComponent as CaretBottom } from './CaretBottom.svg';
