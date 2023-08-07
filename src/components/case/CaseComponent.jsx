@@ -20,7 +20,7 @@ const CaseComponent = () => {
   useEffect(() => {
     /** @type {import("@cesdk/engine").Configuration} */
     const config = {
-      theme: 'light',
+      theme: 'dark',
       initialSceneMode: 'Video',
       initialSceneURL: caseAssetPath('/templates/motion.scene'),
       i18n: {
