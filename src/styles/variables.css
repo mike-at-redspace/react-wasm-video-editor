@@ -1,14 +1,14 @@
 /* From IMG.LY Gatsby Theme */
 :root {
-  --primary-color: #471aff;
+  --primary-color: #0066db;
   --background-color: #fafafa;
   --border-color: rgba(0, 0, 0, 0.5);
   --divider-color: rgb(128, 128, 128);
   --overlay-bg: rgba(0, 0, 0, 0.5);
   /* button */
-  --button-primary-hover-bg: #6038ff;
-  --button-primary-shadow: 0 0.25rem 0.625rem 1px rgba(47, 18, 165, 0.25);
-  --button-primary-hover-shadow: 0 0.25rem 0.625rem 1px rgba(47, 18, 165, 0.4);
+  --button-primary-hover-bg: #5a36c0;
+  --button-primary-shadow: 0 0.25rem 0.625rem 1px rgba(0, 102, 219, 0.25);
+  --button-primary-hover-shadow: 0 0.25rem 0.625rem 1px rgba(90, 54, 192, 0.4);
   --button-border: none;
   --button-high-emphasis-bg: var(--primary-color);
   --button-secondary-bg: rgba(22, 22, 23, 0.08);
@@ -79,7 +79,7 @@
     --font-family-lato,
     sans-serif
   );
-  --ubq-typography-headline-l-weight: 600;
+  --ubq-typography-headline-l-weight: 900;
 
   --ubq-typography-headline-m-size: 12px;
   --ubq-typography-headline-m-line_height: 16px;
@@ -88,7 +88,7 @@
     --font-family-lato,
     sans-serif
   );
-  --ubq-typography-headline-m-weight: 600;
+  --ubq-typography-headline-m-weight: 700;
 
   --ubq-typography-label-m-size: 12px;
   --ubq-typography-label-m-line_height: 16px;
@@ -121,8 +121,6 @@
   --ubq-typography-input-m-line_height: 16px;
   --ubq-typography-input-m-letter_spacing: 0.02em;
   --ubq-typography-input-m-font_family: var(
-    --ubq-typography-font_family,
-    'Overpass Mono',
     monospace
   );
   --ubq-typography-input-m-weight: 500;
@@ -154,7 +152,7 @@
   --ubq-interactive-active-pressed: hsla(0, 0%, 100%, 0.65);
   --ubq-interactive-accent-default: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.06), hsla(0, 0%, 100%, 0) ), hsla(230, 90%, 60%, 0.8);
   --ubq-interactive-accent-hover: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.1), hsla(0, 0%, 100%, 0) ), hsla(230, 90%, 60%, 0.7);
-  --ubq-interactive-accent-pressed: hsla(230, 90%, 60%, 0.7)
+  --ubq-interactive-accent-pressed: hsla(230, 90%, 60%, 0.7);
   --ubq-interactive-danger-default: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.07), hsla(0, 0%, 100%, 0) ), hsla(338, 64%, 62%, 0.85);
   --ubq-interactive-danger-hover: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.07), hsla(0, 0%, 100%, 0) ), hsla(338, 64%, 62%, 0.65);
   --ubq-interactive-danger-pressed: hsla(338, 64%, 62%, 0.65);

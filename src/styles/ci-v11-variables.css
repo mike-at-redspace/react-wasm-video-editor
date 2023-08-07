@@ -5,15 +5,15 @@
   --ci-interactive-default: rgba(22, 22, 23, 0.08);
 
   /* CI Accent */
-  --ci-accent-primary: #471aff;
-  --ci-accent-primary-alternative: #00ffb7;
-  --ci-accent-ce-sdk: #ad00ff;
-  --ci-accent-ve-sdk: #f20c5f;
+  --ci-accent-primary: #0066db;
+  --ci-accent-primary-alternative: #49d761;
+  --ci-accent-ce-sdk: #5a36c0;
+  --ci-accent-ve-sdk: #dc3545;
   --ci-accent-pe-sdk: #ff5c00;
   --ci-accent-gradient: linear-gradient(
     90deg,
-    #471aff 0%,
-    #ad00ff 44.93%,
+    #0066db 0%,
+    #5a36c0 44.93%,
     #f20c5f 71.27%,
     #ff5c00 99.15%
   );
@@ -30,7 +30,7 @@
   --ci-foreground-white-lighter: rgba(255, 255, 255, 0.25);
 
   /* CI Border */
-  --ci-border-primary: rgba(71, 26, 255, 0.3);
+  --ci-border-primary: #0066db;
   --ci-border-black: rgba(22, 22, 23, 0.3);
   --ci-border-black-light: rgba(22, 22, 23, 0.08);
   --ci-border-white: rgba(255, 255, 255, 0.3);
