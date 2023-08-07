@@ -1,8 +1,10 @@
 import CreativeEditorSDK, { UserInterfaceElements } from '@cesdk/cesdk-js';
 import { useEffect, useRef } from 'react';
+
 import { createApplyFormatAsset } from './createApplyFormatAsset';
 import { createDefaultApplyAssetScene } from './defaultApplyAssetScene';
 import loadAssetSourceFromContentJSON from './loadAssetSourceFromContentJSON';
+import { unsplashAssetLibrary } from './unsplashAssetLibrary';
 import {
   formatAssetsToPresets,
   pageFormatI18n,
@@ -13,28 +15,6 @@ import AUDIO_ASSETS from './StaticAudioAssets.json';
 import VIDEO_SCENES_ASSETS from './StaticVideoScenesAssets.json';
 import { caseAssetPath } from './util';
 
-const fontNames = [
-  'Open Sans', 'Roboto', 'Montserrat', 'Lato', 'Poppins',
-  'Noto Sans', 'Oswald', 'Raleway', 'Roboto Condensed', 'Merriweather',
-  'Ubuntu', 'Source Sans Pro', 'Playfair Display', 'Quicksand',
-  'Dancing Script', 'Inconsolata', 'Muli', 'Crimson Text', 'Karla', 'Lora'
-];
-
-const typefaces = {};
-for (const fontName of fontNames) {
-  const familyName = fontName.replace(/\s+/g, '').toLowerCase();
-  typefaces[familyName] = {
-    family: fontName,
-    fonts: [
-      {
-        fontURL: `https://fonts.googleapis.com/css2?family=${encodeURIComponent(familyName)}:display=swap`,
-        weight: 'regular',
-        style: 'normal'
-      }
-    ]
-  };
-}
-
 const CaseComponent = () => {
   const cesdk_container = useRef(null);
   const cesdkRef = useRef(null);
@@ -43,23 +23,23 @@ const CaseComponent = () => {
     /** @type {import("@cesdk/engine").Configuration} */
     const config = {
       theme: 'dark',
-      initialSceneMode: 'Video',
-      initialSceneURL: caseAssetPath('/templates/motion.scene'),
+      license: import.meta.env.VITE_CE_LICENSE,
       i18n: {
         en: {
           'libraries.ly.img.audio.ly.img.audio.label': 'Soundstripe',
           ...pageFormatI18n(PAGE_FORMAT_ASSETS.assets),
-          'libraries.ly.img.video.templates.label': 'Example Templates'
+          'libraries.ly.img.video.templates.label': 'Example Templates',
+          'libraries.unsplash.label': 'Unsplash'
         }
-      },
-      presets: {
-        pageFormats: formatAssetsToPresets(PAGE_FORMAT_ASSETS)
       },
       ui: {
         elements: {
           view: 'default',
           panels: {
             settings: true
+          },
+          presets: {
+            pageFormats: formatAssetsToPresets(PAGE_FORMAT_ASSETS)
           },
           dock: {
             groups: [
@@ -80,13 +60,40 @@ const CaseComponent = () => {
           libraries: {
             insert: {
               entries: (defaultEntries) => {
+                const entriesWithoutDefaultImages = defaultEntries.filter(
+                  (entry) => {
+                    return entry.id !== 'ly.img.image';
+                  }
+                );
                 return [
-                  ...defaultEntries,
+                  ...entriesWithoutDefaultImages,
                   PAGE_FORMATS_INSERT_ENTRY,
                   {
                     id: 'ly.img.video.templates',
                     sourceIds: ['ly.img.video.templates'],
                     icon: () => caseAssetPath('/static-video-scenes-icon.svg')
+                  },
+                  {
+                    id: 'unsplash',
+                    sourceIds: ['unsplash'],
+                    previewLength: 3,
+                    gridItemHeight: 'auto',
+                    gridBackgroundType: 'cover',
+                    gridColumns: 2
+                  }
+                ];
+              }
+            },
+            replace: {
+              entries: () => {
+                return [
+                  {
+                    id: 'unsplash',
+                    sourceIds: ['unsplash'],
+                    previewLength: 3,
+                    gridItemHeight: 'auto',
+                    gridBackgroundType: 'cover',
+                    gridColumns: 2
                   }
                 ];
               }
@@ -101,7 +108,6 @@ const CaseComponent = () => {
           }
         }
       },
-      typefaces: typefaces,
       callbacks: {
         onUpload: 'local',
         onDownload: 'download',
@@ -112,7 +118,7 @@ const CaseComponent = () => {
 
     let cesdk;
     if (cesdk_container.current) {
-      CreativeEditorSDK.init(cesdk_container.current, config).then(
+      CreativeEditorSDK.create(cesdk_container.current, config).then(
         async (instance) => {
           instance.addDefaultAssetSources();
           instance.addDemoAssetSources({
@@ -123,6 +129,7 @@ const CaseComponent = () => {
           cesdk = instance;
           cesdkRef.current = instance;
           cesdk.engine.editor.setSettingBool('page/title/show', false);
+          cesdk.engine.scene.loadFromURL(caseAssetPath('/templates/motion.scene'));
 
           loadAssetSourceFromContentJSON(
             cesdk.engine,
@@ -143,6 +150,8 @@ const CaseComponent = () => {
             caseAssetPath('/page-formats'),
             createApplyFormatAsset(cesdk.engine)
           );
+
+          instance.engine.asset.addSource(unsplashAssetLibrary);
         }
       );
     }
