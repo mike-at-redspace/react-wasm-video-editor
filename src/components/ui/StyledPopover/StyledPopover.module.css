@@ -6,9 +6,8 @@
 .popover {
   display: flex;
   padding: 8px 12px;
-  background: #000000;
-  border-radius: 8px;
-  color: #ffffff;
+  border-radius: 4px;
+  color: #000000;
   font-family: var(--font-family-fira);
   font-size: 14px;
   font-style: normal;

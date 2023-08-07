@@ -1,4 +1,4 @@
-import { createRoot } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 
 // Codesandbox does not properly parse @imports so we import them here

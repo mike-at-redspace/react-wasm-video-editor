@@ -97,10 +97,10 @@
     --ubq-typography-font_family,
     sans-serif
   );
-  --ubq-typography-label-m-weight: 500;
+  --ubq-typography-label-m-weight: 400;
 
   --ubq-typography-label-s-size: 10px;
-  --ubq-typography-label-s-line_height: 14px;
+  --ubq-typography-label-s-line_height: 18px;
   --ubq-typography-label-s-letter_spacing: 0.02em;
   --ubq-typography-label-s-font_family: var(
     --ubq-typography-font_family,
@@ -109,7 +109,7 @@
   --ubq-typography-label-s-weight: 400;
 
   --ubq-typography-body-m-size: 12px;
-  --ubq-typography-body-m-line_height: 18px;
+  --ubq-typography-body-m-line_height: 20px;
   --ubq-typography-body-m-letter_spacing: 0.02em;
   --ubq-typography-body-m-font_family: var(
     --ubq-typography-font_family,
@@ -118,7 +118,7 @@
   --ubq-typography-body-m-weight: normal;
 
   --ubq-typography-input-m-size: 12px;
-  --ubq-typography-input-m-line_height: 16px;
+  --ubq-typography-input-m-line_height: 14px;
   --ubq-typography-input-m-letter_spacing: 0.02em;
   --ubq-typography-input-m-font_family: var(
     monospace
@@ -126,7 +126,7 @@
   --ubq-typography-input-m-weight: 500;
 
   --ubq-typography-button-m-size: 12px;
-  --ubq-typography-button-m-line_height: 16px;
+  --ubq-typography-button-m-line_height: 14px;
   --ubq-typography-button-m-letter_spacing: 0.02em;
   --ubq-typography-button-m-font_family: var(
     --font-family-lato,
@@ -136,30 +136,42 @@
   --ubq-canvas: hsl(210, 30%, 5%);
   --ubq-elevation-1: hsl(210, 15%, 10%);
   --ubq-elevation-2: hsl(210, 7.5%, 20%);
-  --ubq-elevation-3: hsl(210, 4%, 15%);
+  --ubq-elevation-3: hsl(210, 4%, 25%);
   --ubq-foreground-default: hsla(210, 0%, 100%, 0.9);
-  --ubq-foreground-light: hsla(210, 0%, 100%, 0.7);
-  --ubq-foreground-info: hsla(40, 100%, 60%, 1);
-  --ubq-foreground-active: hsla(210, 30%, 10%, 0.9);
-  --ubq-foreground-accent: hsla(210, 0%, 100%, 0.9);
-  --ubq-foreground-danger: hsl(338, 100%, 50%);
-  --ubq-interactive-default: linear-gradient( to bottom, hsla(0, 0%, 100%, 0.04), hsla(0, 0%, 100%, 0) ), hsla(0, 0%, 100%, 0.1);
-  --ubq-interactive-hover: linear-gradient( to bottom, hsla(0, 0%, 100%, 0.04), hsla(0, 0%, 100%, 0) ), hsla(0, 0%, 100%, 0.06);
-  --ubq-interactive-pressed: hsla(0, 0%, 100%, 0.06);
+  --ubq-foreground-light: hsla(210, 0%, 100%, 0.9);
+  --ubq-foreground-info: inherit;
+  --ubq-foreground-active: hsla(210, 0%, 100%, 0.9);
+  --ubq-foreground-accent: hsl(210, 0%, 100%);
+  --ubq-foreground-danger: hsla(338, 100%, 50%, 0.7);
+  --ubq-interactive-default: linear-gradient( to bottom, hsla(0, 0%, 100%, 0.05), hsla(0, 0%, 100%, 0) ), hsla(0, 0%, 100%, 0.25);
+  --ubq-interactive-hover: linear-gradient( to bottom, hsla(0, 0%, 100%, 0.05), hsla(0, 0%, 100%, 0) ), hsla(0, 0%, 100%, 0.125);
+  --ubq-interactive-pressed: linear-gradient(
+    160deg in oklch,
+    color(display-p3 0.1 0.6 0.9) 15%,
+    color(display-p3 0.4 0.2 0.8) 99%
+  );
   --ubq-interactive-selected: linear-gradient(
     160deg in oklch,
     color(display-p3 0.1 0.6 0.9) 15%,
     color(display-p3 0.4 0.2 0.8) 99%
   );
-  --ubq-interactive-active-default: linear-gradient( to bottom, hsla(0, 0%, 100%, 1), hsla(0, 0%, 100%, 0) ), hsla(0, 0%, 100%, 0.88);
+  --ubq-interactive-active-default: linear-gradient(
+    160deg in oklch,
+    color(display-p3 0.1 0.6 0.9) 15%,
+    color(display-p3 0.4 0.2 0.8) 99%
+  );
   --ubq-interactive-active-hover: linear-gradient( to bottom, hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0) ), hsla(210, 100%, 95%, 0.65);
-  --ubq-interactive-active-pressed: hsla(0, 0%, 100%, 0.65);
+  --ubq-interactive-active-pressed: linear-gradient(
+    160deg in oklch,
+    color(display-p3 0.1 0.6 0.9) 15%,
+    color(display-p3 0.4 0.2 0.8) 99%
+  );
   --ubq-interactive-accent-default: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.06), hsla(0, 0%, 100%, 0) ), hsla(230, 90%, 60%, 0.8);
   --ubq-interactive-accent-hover: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.1), hsla(0, 0%, 100%, 0) ), hsla(230, 90%, 60%, 0.7);
   --ubq-interactive-accent-pressed: hsla(230, 90%, 60%, 0.7);
-  --ubq-interactive-danger-default: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.07), hsla(0, 0%, 100%, 0) ), hsla(338, 64%, 62%, 0.85);
-  --ubq-interactive-danger-hover: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.07), hsla(0, 0%, 100%, 0) ), hsla(338, 64%, 62%, 0.65);
-  --ubq-interactive-danger-pressed: hsla(338, 64%, 62%, 0.65);
+  --ubq-interactive-danger-default: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.07), hsla(0, 0%, 100%, 0) ), hsla(334, 73%, 43%, 0.85);
+  --ubq-interactive-danger-hover: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.07), hsla(0, 0%, 100%, 0) ), hsla(338, 100%, 50%, 0.7);
+  --ubq-interactive-danger-pressed: hsla(338, 100%, 50%, 0.7);
   --ubq-interactive-template-default: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.06), hsla(0, 0%, 100%, 0) ), hsla(274, 97%, 60%, 0.6);
   --ubq-interactive-template-hover: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.06), hsla(0, 0%, 100%, 0) ), hsla(274, 97%, 60%, 0.5);
   --ubq-interactive-template-pressed: hsla(274, 97%, 60%, 0.5);
@@ -172,22 +184,23 @@
   --ubq-border-default: hsla(0, 0%, 100%, 0.16);
   --ubq-stroke-contrast-1: hsla(0, 0%, 100%, 0.12);
   --ubq-stroke-contrast-2: hsla(0, 0%, 100%, 0.25);
-  --ubq-focus-default: #0066db;
+  --ubq-focus-default: hsla(230, 90%, 60%, 0.7);
   --ubq-focus-outline: hsl(210, 30%, 10%);
   --ubq-overlay: hsla(210, 30%, 10%, 0.8);
-  --ubq-notice-info: hsla(0, 0%, 100%, 1);
+  --ubq-notice-info: hsla(210, 30%, 10%, 0.8);
   --ubq-notice-success: #49d761;
   --ubq-notice-warning: hsla(40, 100%, 60%, 1);
-  --ubq-notice-error: hsla(338, 64%, 62%, 1);
+  --ubq-notice-error: hsla(338, 100%, 50%, 0.7);
   --ubq-effect-shadow: 0px 4px 16px -4px hsla(210, 27%, 9%, 0.14), 0px 1px 20px -4px hsla(210, 27%, 9%, 0.12), 0px 2px 12px -4px hsla(210, 27%, 9%, 0.2);
-  --ubq-effect-focus: 0 0 0 calc(4px / 2 - 0.01px) hsl(210, 30%, 10%), 0 0 0 4px hsl(230, 90%, 80%);
+  --ubq-effect-focus: 0 0 0 calc(4px / 2 - 0.01px) hsl(210, 30%, 10%), 0 0 0 4px hsla(230, 90%, 60%, 0.7);
   --ubq-progress: hsla(210, 0%, 100%, 0.7);
-  --ubq-static-selection-frame: #0066db;
+  --ubq-static-selection-frame: hsla(230, 90%, 60%, 0.7);
   --ubq-static-contrast-white: hsl(0, 0%, 100%);
   --ubq-static-contrast-black: hsl(0, 0%, 0%);
-  --ubq-static-snapping: hsl(338, 100%, 50%);
+  --ubq-static-snapping: hsla(338, 100%, 50%, 0.7);
   --ubq-static-bleed: hsl(334, 73%, 43%);
   --ubq-static-text-variable: #5a36c0;
   --ubq-static-card-label-background: linear-gradient( 180deg, rgba(0, 0, 0, 0) 14.46%, rgba(0, 0, 0, 0.6) 100% );
   --ubq-static-card-background: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.08), hsla(0, 0%, 0%, 0.08) ), hsla(0, 0%, 67%, 0.16);
+  --ubq-margin-xl: 4px;
 }
